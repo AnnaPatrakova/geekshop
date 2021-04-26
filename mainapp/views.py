@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import json
 
 
 def index(request):
@@ -26,6 +27,12 @@ def test_context(request):
         ],
 
     }
+    return render(request, 'mainapp/test_context.html', context)
+
+def test_context_json(request):
+    f = open('katalog.json')
+    context = json.load(f)
+    f.close()
     return render(request, 'mainapp/test_context.html', context)
 
 

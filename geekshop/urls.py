@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from mainapp.views import index, products, test_context
+from mainapp.views import index, products, test_context, test_context_json
 
 
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('products/', products, name='products'),
-    path('test_context/', test_context, name='test-context')
+    path('test_context/', test_context, name='test-context'),
+    path('test_context_json/', test_context_json, name='test-context_json')
 
 ]
