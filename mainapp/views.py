@@ -1,5 +1,8 @@
 from django.shortcuts import render
+import os
 import json
+
+module_dir = os.path.dirname(__file__)
 
 
 def index(request):
@@ -8,32 +11,15 @@ def index(request):
 
 
 def products(request):
-    context = {'title': 'GeekShop - Каталог'}
+    file_path = os.path.join(module_dir, 'fixtures/products.json')
+    products = json.load(open(file_path, encoding='utf-8'))
+    context = {'title': 'GeekShop - Каталог',
+             'products': products }
+
     return render(request, 'mainapp/products.html', context)
 
-def test_context(request):
-    context = {
-        'title': 'Text Context',
-        'header': 'Добро пожаловать на сайт!',
-        'username': 'Иван Иванов',
-        'products': [
-            {'name': 'Худи черного цвета с монограммами adidas Originals', 'price': 6090.00},
-            {'name': 'Синяя куртка The North Face', 'price': 23725.00},
-            {'name': 'Коричневый спортивный oversized-топ ASOS DESIGN', 'price': 3390.00},
-            {'name': 'Черный рюкзак Nike Heritage', 'price': 2340.00},
-            {'name': 'Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex', 'price': 13590.00},
-            {'name': 'Темно-синие широкие строгие брюки ASOS DESIGN', 'price': 2890.00},
 
-        ],
 
-    }
-    return render(request, 'mainapp/test_context.html', context)
-
-def test_context_json(request):
-    f = open('katalog.json')
-    context = json.load(f)
-    f.close()
-    return render(request, 'mainapp/test_context.html', context)
 
 
 
