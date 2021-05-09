@@ -33,4 +33,8 @@ def register(request):
     context = {'title': 'GeekShop - Регистрация', 'form': form}
     return render(request, 'authapp/register.html', context)
 
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
 # Create your views here.
