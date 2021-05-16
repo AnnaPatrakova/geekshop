@@ -43,10 +43,12 @@ def profile(request):
             return HttpResponseRedirect(reverse('users:profile'))
     else:
         form = UserProfileForm(instance=request.user)
-    context = {'title': "GeekShop - Личный кабинет",
-               'form': form,
-               'baskets': Basket.objects.all(),
-               }
+
+    context = {
+        'title': "GeekShop - Личный кабинет",
+         'form': form,
+         'baskets': Basket.objects.filter(user=request.user),
+        }
     return render(request, 'authapp/profile.html', context)
 
 def logout(request):
